@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base target="_top">
+
+  <script>
+    //PREVENT FORMS FROM SUBMITTING / PREVENT DEFAULT BEHAVIOUR
+          function preventFormSubmit() {
+            var forms = document.querySelectorAll('form');
+            for (var i = 0; i < forms.length; i++) {
+              forms[i].addEventListener('submit', function(event) {
+              event.preventDefault();
+              });
+            }
+            console.log("Prevent Form Submit");
+          }
+          
+          window.addEventListener("load", preventFormSubmit, true); 
+             
+          
+          //HANDLE FORM SUBMISSION
+          function handleFormSubmit(formObject) {
+            console.log("Handle Form Submit");
+            google.script.run.withSuccessHandler(returnData).processForm(formObject);
+            //document.getElementById("search-results").reset();
+
+             var gr = document.getElementById('greetings-result');
+             var form = document.getElementById('form');
+             form.style.display = 'none';
+             gr.style.display = 'block';
+             gr.innerHTML = "<img src=\"https://media.tenor.com/TAqs38FFJiwAAAAi/loading.gif\" alt=\"Loading...\">";
+
+          }
+        
+          //CREATE THE DATA TABLE
+          //CREATE THE DATA TABLE
+          function returnData(data) {
+           
+              var gr = document.getElementById('greetings-result');
+              gr.style.display = 'block';
+              gr.innerHTML = data;
+          }
+  </script>
+
+</head>
+
+<body>
+
+  <form id="form" onsubmit="handleFormSubmit(this)">
+
+    <div class="form">
+      <!-- <div class="title-div">
+        <h1>Data Collection for research Purpose</h1>
+        <p class="required">*Required</p>
+      </div> -->
+
+      <div class="name-div">
+        <div class="name">What is your name?<span class="required">*</span></div>
+        <div class="input-div"><input id="name" type="text" name="name" placeholder="Your answer" value=" " required></div>
+      </div>
+      <div class="gender-div">
+        <div class="name">Select Your Gender<span class="required">*</span> </div>
+        <div class="input-div"><select id="gender" name="gender" class="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            </select></div>
+      </div>
+
+      <div class="gmail-div">
+        <div class="name">Enter Your E-mail<span class="required">*</span></div>
+        <div class="input-div"><input type="email" id="email" name="email" required></div>
+      </div>
+
+      <div class="college-div">
+        <div class="name" >Enter your University name</div>
+        <div class="input-div">
+            <datalist id="suggestions">
+                <!--Public University-->
+                <option>University of Dhaka (DU)</option>
+                <option>University of Rajshahi (RU)</option>
+                <option>Bangladesh Agricultural University (BAU)</option>
+                <option>Bangladesh University of Engineering & Technology (BUET)</option>
+                <option>University of Chittagong (CU)</option>
+                <option>Jahangirnagar University (JU)</option>
+                <option>Islamic University, Bangladesh (IU)</option>
+                <option>Shahjalal University of Science & Technology (SUST)</option>
+                <option>Khulna University (KU)</option>
+                <option>National University (NU)</option>
+                <option>Bangladesh Open University (BOU)</option>
+                <option>Bangabandhu Sheikh Mujib Medical University (BSMMU)</option>
+                <option>Bangabandhu Sheikh Mujibur Rahman Agricultural University (BSMRSU)</option>
+                <option>Hajee Mohammad Danesh Science & Technology University (HMDSTU)</option>
+                <option>Mawlana Bhashani Science & Technology University (MBSTU)</option>
+                <option>Patuakhali Science And Technology University (PSTU)</option>
+                <option>Sher-e-Bangla Agricultural University (SBAU)</option>
+                <option>Chittagong University of Engineering & Technology (CUET)</option>
+                <option>Rajshahi University of Engineering & Technology (RUET)</option>
+                <option>Khulna University of Engineering & Technology (KUET)</option>
+                <option>Dhaka University of Engineering & Technology (DUET)</option>
+                <option>Noakhali Science & Technology University (NSTU)</option>
+                <option>Jagannath University (JnU)</option>
+                <option>Comilla University (CoU)</option>
+                <option>Jatiya Kabi Kazi Nazrul Islam University (JKKNIU)</option>
+                <option>Chittagong Veterinary and Animal Sciences University (CVASU)</option>
+                <option>Sylhet Agricultural University (SAU)</option>
+                <option>Jessore University of Science & Technology (JUST)</option>
+                <option>Pabna University of Science and Technology (PUST)</option>
+                <option>Begum Rokeya University, Rangpur (BRU)</option>
+                <option>Bangladesh University of Professionals (BUP)</option>
+                <option>Bangabandhu Sheikh Mujibur Rahman Science & Technology University (BSMRSTU)</option>
+                <option>Bangladesh University of Textiles (BUTEX)</option>
+                <option>University of Barishal (BU)</option>
+                <option>Rangamati Science and Technology University (RSTU)</option>
+                <option>Bangabandhu Sheikh Mujibur Rahman Maritime University, Bangladesh (BSMRMU)</option>
+                <option>Islamic Arabic University (IAU)</option>
+                <option>Chittagong Medical University (CMU)</option>
+                <option>Rajshahi Medical University (RMU)</option>
+                <option>Rabindra University, Bangladesh (RUB)</option>
+                <option>Bangabandhu Sheikh Mujibur Rahman Digital University, Bangladesh (BSMRDU)</option>
+                <option>Sheikh Hasina University (SHU)</option>
+                <option>Khulna Agricultural University (KAU)</option>
+                <option>Bangamata Sheikh Fojilatunnesa Mujib Science and Technology University (BSFMSTU)</option>
+                <option>Bangamata Sheikh Fazilatunessa Mujib Medical University, Sylhet (BSFMUMU)</option>
+                <option>Kurigram Agricultural University (KRAU)</option>
+                <option>Sunamganj Science and Technology University (SSTU)</option>
+                <option>Bangabandhu Sheikh Mujibur Rahman Science & Technology University, Pirojpur (BSMRSTUP)</option>
+                <option>Bangabandhu Sheikh Mujibur Rahman University, Naogaon (BSMRUN)</option>
+                <option>Mujibnagar University, Meherpur (MUM)</option>
+                <option>Bangabandhu Sheikh Mujibur Rahman Aviation And Aerospace University (BSMRAAU)</option>
+                <option>Chandpur Science and Technology University (CSTU)</option>
+                <option>Bangabandhu Sheikh Mujibur Rahman University, Kishoreganj (BSMRUK)</option>
+                <option>Hobiganj Agricultural University (HAU)</option>
+                <option>Sheikh Hasina Medical University, Khulna (SHMU)</option>
+    
+                <!--Private University-->
+                <option>North South University (NSU)</option>
+                <option>University of Science & Technology Chittagong (USTC)</option>
+                <option>Independent University, Bangladesh (IUB)</option>
+                <option>Central Women's University (CWU)</option>
+                <option>International University of Business Agriculture & Technology (IUBAT)</option>
+                <option>International Islamic University Chittagong (IIUC)</option>
+                <option>Ahsanullah University of Science and Technology (AUST)</option>
+                <option>American International University-Bangladesh (AIUB)</option>
+                <option>East West University (EWU)</option>
+                <option>University of Asia Pacific (UAP)</option>
+                <option>Gono Bishwabidyalay (Gono University)</option>
+                <option>The People's University of Bangladesh * (PUB)</option>
+                <option>Asian University of Bangladesh (AUB)</option>
+                <option>Dhaka International University (DIU)</option>
+                <option>Manarat International University (MIU)</option>
+                <option>BRAC University (BRACU)</option>
+                <option>Bangladesh University * (BU)</option>
+                <option>Leading University (LU)</option>
+                <option>BGC Trust University Bangladesh (BGCTUB)</option>
+                <option>Sylhet International University (SIU)</option>
+                <option>University of Development Alternative (UODA)</option>
+                <option>Premier University (PU)</option>
+                <option>Southeast University (SEU)</option>
+                <option>Daffodil International University (DIU)</option>
+                <option>Stamford University Bangladesh (SUB)</option>
+                <option>State University of Bangladesh (SUB)</option>
+                <option>City University (CityU)</option>
+                <option>Prime University (PrimeU)</option>
+                <option>Northern University Bangladesh (NUB)</option>
+                <option>Southern University Bangladesh (SUB)</option>
+                <option>Green University of Bangladesh (GUB)</option>
+                <option>Pundra University of Science & Technology (PUST)</option>
+                <option>World University of Bangladesh (WUB)</option>
+                <option>Shanto-Mariam University of Creative Technology (SMUCT)</option>
+                <option>The Millennium University (TMU)</option>
+                <option>Eastern University (EU)</option>
+                <option>Metropolitan University (MetroU)</option>
+                <option>Uttara University (UU)</option>
+                <option>United International University (UIU)</option>
+                <option>University of South Asia (UOSA)</option>
+                <option>Victoria University of Bangladesh * (VUB)</option>
+                <option>Bangladesh University of Business & Technology (BUBT)</option>
+                <option>Presidency University (PU)</option>
+                <option>University of Information Technology & Sciences (UITS)</option>
+                <option>Primeasia University (PU)</option>
+                <option>Royal University of Dhaka (RUD)</option>
+                <option>University of Liberal Arts Bangladesh (ULAB)</option>
+                <option>Atish Dipankar University of Science & Technology (ADUST)</option>
+                <option>Bangladesh Islami University (BIU)</option>
+                <option>ASA University Bangladesh (ASAUB)</option>
+                <option>East Delta University (EDU)</option>
+                <option>European University of Bangladesh * (EUB)</option>
+                <option>Varendra University (VU)</option>
+                <option>Hamdard University Bangladesh (HUB)</option>
+                <option>BGMEA University of Fashion & Technology(BUFT) (BUFT)</option>
+                <option>North East University Bangladesh (NEUB)</option>
+                <option>First Capital University of Bangladesh (FCUB)</option>
+                <option>Ishakha International University, Bangladesh (IIUB)</option>
+                <option>Z.H Sikder University of Science & Technology (ZHSUST)</option>
+                <option>Exim Bank Agricultural University, Bangladesh (EBAUB)</option>
+                <option>North Western University (NWU)</option>
+                <option>Khwaja Yunus Ali University (KYAU)</option>
+                <option>Sonargaon University (SU)</option>
+                <option>Feni University (FeniU)</option>
+                <option>Britannia University (BU)</option>
+                <option>Port City International University (PCIU)</option>
+                <option>Bangladesh University of Health Sciences (BUHS)</option>
+                <option>Chittagong Independent University (CIU)</option>
+                <option>Notre Dame University Bangladesh (NDUB)</option>
+                <option>Times University, Bangladesh (TU)</option>
+                <option>North Bengal International University (NBIU)</option>
+                <option>Fareast International University (FIU)</option>
+                <option>Rajshahi Science & Technology University (RSTU), Natore (RSTU)</option>
+                <option>Sheikh Fazilatunnesa Mujib University (SFMU)</option>
+                <option>Cox's Bazar International University (CBIU)</option>
+                <option>R. P. Shaha University (RPSU)</option>
+                <option>German University Bangladesh (GUB)</option>
+                <option>Global University Bangladesh (GUB)</option>
+                <option>CCN University of Science & Technology (CCNUST)</option>
+                <option>Bangladesh Army University of Science and Technology(BAUST), Saidpur (BAUST)</option>
+                <option>Bangladesh Army University of Engineering and Technology (BAUET), Qadirabad (BAUET)</option>
+                <option>Bangladesh Army International University of Science & Technology(BAIUST), Comilla (BAIUST)</option>
+                <option>University of Scholars (US)</option>
+                <option>Canadian University of Bangladesh (CUB)</option>
+                <option>N.P.I University of Bangladesh (NPIUB)</option>
+                <option>Northern University of Business & Technology, Khulna (NUBTK)</option>
+                <option>Rabindra Maitree University, Kushtia (RMU)</option>
+                <option>University of Creative Technology, Chittagong (UCTC)</option>
+                <option>Central University of Science and Technology ** (CUST)</option>
+                <option>Tagore University of Creative Arts, Uttara, Dhaka, Bangladesh (TUCA)</option>
+                <option>University of Global Village (UGV)</option>
+                <option>Anwer Khan Modern University (AKMU)</option>
+                <option>ZNRF University of Management Sciences (ZUMS)</option>
+                <option>Ahsania Mission University of Science and Technology (AMUST)</option>
+                <option>Khulna Khan Bahadur Ahsanullah University (KKBAU)</option>
+                <option>Bandarban University (BUBBAN)</option>
+                <option>Trust University, (TU)</option>
+    
+              </datalist>
+              <input id="university" type="text" name="university" autoComplete="on" list="suggestions" required/>
+        </div>
+      </div>
+
+      <div class="name-div">
+        <div class="name">Enter Your current CGPA<span class="required">*</span></div>
+        <div class="input-div"><input type="number" name="cgpa" id="cgpa" placeholder="Your cgpa" required></div>
+      </div>
+
+      <div class="soft-div">
+        <div class="checkbox-name">Chose Your soft skills </div>
+        <div class="checkbox">
+            <input type="checkbox" id="criticalThinking" name="criticalThinking" value="Critical Thinking"/>
+            <label for="criticalThinking">Critical Thinking</label><br>
+
+            <input type="checkbox" id="problemSolving" name="problemSolving" value="Problem Solving"/>
+            <label for="problemSolving">Problem Solving</label><br>
+
+            <input type="checkbox" id="publicSpeaking" name="publicSpeaking" value="Public Speaking"/>
+            <label for="publicSpeaking">Public Speaking</label><br>
+
+            <input type="checkbox" id="professionalWriting" name="professionalWriting" value="Professional Writing"/>
+            <label for="professionalWriting">Professional Writing</label><br>
+
+            <input type="checkbox" id="teamwork" name="teamwork" value="Teamwork"/>
+            <label for="teamwork">Teamwork</label><br>
+
+            <input type="checkbox" id="leadership" name="leadership" value="Leadership & Professional Attitude"/>
+            <label for="leadership">Leadership & Professional Attitude</label><br>
+
+            <input type="checkbox" id="massCommunication" name="massCommunication" value="Mass Communication"/>
+            <label for="massCommunication">Mass Communication</label><br>
+
+        </div>
+
+      </div>
+
+      <div class="academic-div">
+        <div class="checkbox-name">Chose Your academic skill </div>
+        <div class="checkbox">
+            <input type="checkbox" id="softwareEngineering" name="softwareEngineering" value="Software Engineering Principal"/>
+            <label for="softwareEngineering">Software Engineering Principal</label><br>
+
+            <input type="checkbox" id="dataStructure" name="dataStructure" value="Data structure and Algorithm"/>
+            <label for="dataStructure">Data structure and Algorithm</label><br>
+
+            <input type="checkbox" id="databaseManagement" name="databaseManagement" value="Database Management"/>
+            <label for="databaseManagement">Database Management</label><br>
+
+            <input type="checkbox" id="dataAnalysis" name="dataAnalysis" value="Data Analysis"/>
+            <label for="dataAnalysis">Data Analysis</label><br>
+
+            <input type="checkbox" id="webDevelopment" name="webDevelopment" value="Web developing skill"/>
+            <label for="webDevelopment">Web developing skill</label><br>
+
+            <input type="checkbox" id="computerArchitecture" name="computerArchitecture" value="Understanding of computer architecture and system"/>
+            <label for="computerArchitecture">Understanding of computer architecture and system</label><br>
+
+            <input type="checkbox" id="operatingSystems" name="operatingSystems" value="Understanding of OS"/>
+            <label for="operatingSystems">Understanding of OS</label><br>
+
+            <input type="checkbox" id="networkingConcept" name="networkingConcept" value="Networking Concept"/>
+            <label for="networkingConcept">Networking Concept</label><br>
+
+            <input type="checkbox" id="cyberSecurity" name="cyberSecurity" value="Cyber Security"/>
+            <label for="cyberSecurity">Cyber Security</label><br>
+
+            <input type="checkbox" id="researchSkill" name="researchSkill" value="Research skill"/>
+            <label for="researchSkill">Research skill</label><br>
+
+          </div>
+        </div>
+        <div class="name-div">
+          <div class="name">How many project have you had?</div>
+          <div class="input-div"><input id="project" type="text" name="project" placeholder="Your answer"></div>
+        </div>
+
+        <div class="name-div">
+          <div class="name">How many publications have you had?</div>
+          <div class="input-div"><input id="publication" type="text" name="publication" placeholder="Your answer"></div>
+        </div>
+
+      <div class="factor-div">
+        <div class="checkbox-name">Chose Influencing Factor</div>
+        <div class="checkbox">
+            <input type="checkbox" id="socialAcceptance" name="socialAcceptance" value="Social Acceptance"/>
+            <label for="socialAcceptance">Social Acceptance</label><br>
+
+            <input type="checkbox" id="jobSecurity" name="jobSecurity" value="Job Security"/>
+            <label for="jobSecurity">Job Security</label><br>
+
+            <input type="checkbox" id="jobEnvironment" name="jobEnvironment" value="Job Environment"/>
+            <label for="jobEnvironment">Job Environment</label><br>
+
+            <input type="checkbox" id="salary" name="salary" value="Salary"/>
+            <label for="salary">Salary</label><br>
+          </div>
+
+      </div>
+
+      <div class="job-div">
+        <div class="checkbox-name">Select your Prefer Job</div>
+        <div class="checkbox">
+            <input type="checkbox" id="softwareDevelopmentCompany" name="softwareDevelopmentCompany" value="Software Development Company"/>
+            <label for="softwareDevelopmentCompany">Software Developer</label><br>
+
+            <input type="checkbox" id="softwareDevelopmentCompany" name="softwareDevelopmentCompany" value="Software Development Company"/>
+            <label for="softwareDevelopmentCompany">Web Developer</label><br>
+            
+            <input type="checkbox" id="softwareDevelopmentCompany" name="softwareDevelopmentCompany" value="Software Development Company"/>
+            <label for="softwareDevelopmentCompany">Android Developer</label><br>
+            
+            <input type="checkbox" id="softwareDevelopmentCompany" name="softwareDevelopmentCompany" value="Software Development Company"/>
+            <label for="softwareDevelopmentCompany">Computer Hardware Engineer</label><br>
+
+            <input type="checkbox" id="softwareDevelopmentCompany" name="softwareDevelopmentCompany" value="Software Development Company"/>
+            <label for="softwareDevelopmentCompany">Systems Analyst</label><br>
+
+            <input type="checkbox" id="softwareDevelopmentCompany" name="softwareDevelopmentCompany" value="Software Development Company"/>
+            <label for="softwareDevelopmentCompany">Network Engineer</label><br>
+
+            <input type="checkbox" id="softwareDevelopmentCompany" name="softwareDevelopmentCompany" value="Software Development Company"/>
+            <label for="softwareDevelopmentCompany">Network Engineer</label><br>
+
+            <input type="checkbox" id="bankJob" name="bankJob" value="Bank Job"/>
+            <label for="bankJob">Bank Job</label><br>
+
+            <input type="checkbox" id="bcs" name="bcs" value="BCS"/>
+            <label for="bcs">BCS</label><br>
+
+            <input type="checkbox" id="business" name="business" value="Business"/>
+            <label for="business">Business</label><br>
+
+            <input type="checkbox" id="teaching" name="teaching" value="Teaching"/>
+            <label for="teaching">Teaching</label><br>
+
+            <input type="checkbox" id="researcher" name="researcher" value="Researcher"/>
+            <label for="researcher">Researcher</label><br>
+
+            <input type="checkbox" id="govtJob" name="govtJob" value="Govt Job"/>
+            <label for="govtJob">Govt Job</label><br>
+
+            <input type="checkbox" id="abroad" name="abroad" value="Abroad"/>
+            <label for="abroad">Abroad</label>
+          </div>
+      </div>
+
+      <div class="btn-div">
+        <input class="btn" type="submit" value="Submit">
+      </div>
+
+    </div>
+  </form>
+ <div id="search-results" class="greetings">
+<p id="greetings-result" hidden></p>
+  </div>
+</body>
+
+<style>
+  body {
+    background-color: #ede7f6;
+    font-family: Roboto, Sans-serif;
+  }
+
+  .form, .greetings {   
+    width: 600px; 
+    margin: auto;
+  }
+
+  .greetings {
+            height: 300px;
+            display: grid;
+            place-items: center;
+        }
+ 
+
+  .required {
+    font-size: 13px;
+    color: red;
+  }
+
+  .title-div {
+    width: 600px;
+    background-color: #FDFEFE;
+    border-radius: 8px;
+    border-top: 8px solid #6703c4;
+    padding: 25px;
+  }
+
+  .name{
+    padding-top: 20px;
+    padding-left: 25px;
+    padding-bottom: 25px;
+    font-size: 15px;
+  }
+
+  .job-div, .soft-div, .factor-div, .academic-div, .name-div,
+  .gmail-div, .gender-div, .college-div{
+    display: block;
+    width: 650px;
+    background-color: #FDFEFE;
+    margin-top: 16px;
+border-radius: 8px;
+padding-bottom: 20px;
+  }
+
+  .gender{
+    background: transparent;
+   width: 300px;
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   border: 1.5px solid #DCD7D7;
+   border-radius: 2px;
+   height: 34px;
+   -webkit-appearance: none;
+   }
+
+  .input-div{
+    padding-left: 25px;
+    padding-bottom: 25px;
+  }
+  .checkbox-name{
+    padding-top: 20px;
+    padding-left: 25px;
+    padding-bottom: 15px;
+  }
+  .checkbox {
+    padding-left: 25px;
+    line-height: 2;
+  }
+  .input-div input {
+    width: 300px;
+    border: 0;
+    outline: 0;
+    border-bottom: 1.5px solid #DCD7D7;
+    font-size: 15px;
+  }
+
+  .btn {
+    height: 36px;
+    width: 100px;
+    background-color: #6703c4;
+    border-radius: 5px;
+    font-size: 14px;
+    letter-spacing: .5px;
+    font-weight: 540;
+    border: none;
+    color: white;
+  }
+  .btn-div{
+    padding-top: 15px;
+  }
+
+  </style> </html>
