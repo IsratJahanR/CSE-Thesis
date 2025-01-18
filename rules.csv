@@ -1,0 +1,10 @@
+,antecedents,consequents,support,confidence,lift
+0,frozenset({'Bank Job'}),frozenset({'BCS'}),32.0,0.7111111111111111,7.395555555555555
+1,frozenset({'BCS'}),frozenset({'Bank Job'}),32.0,0.7111111111111111,7.395555555555555
+2,frozenset({'BCS'}),frozenset({'Govt Job'}),36.0,0.8,5.85
+3,frozenset({'Bank Job'}),frozenset({'Govt Job'}),36.0,0.8,5.85
+4,frozenset({'Networking'}),frozenset({'Cyber Security'}),34.0,0.723404255319149,5.460535346602608
+5,"frozenset({'Software Development', 'Networking'})",frozenset({'Cyber Security'}),20.0,0.7692307692307693,5.806451612903226
+6,"frozenset({'Bank Job', 'Govt Job'})",frozenset({'BCS'}),29.0,0.8055555555555556,8.377777777777778
+7,"frozenset({'Bank Job', 'BCS'})",frozenset({'Govt Job'}),29.0,0.9062499999999999,6.626953124999998
+8,"frozenset({'BCS', 'Govt Job'})",frozenset({'Bank Job'}),29.0,0.8055555555555556,8.377777777777778
