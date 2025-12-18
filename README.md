@@ -69,7 +69,3 @@ This paper explains the methodology, dataset, experiments, results, discussion, 
 
 XGBoost achieved the best overall performance across most metrics.
 
----
-
-## 📁 Repository Structure (Logical View)
-
