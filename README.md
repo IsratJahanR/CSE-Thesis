@@ -16,12 +16,6 @@ The project integrates real student data, skill assessments, and career preferen
 - Israt Jahan Reshma  
 - Saleh Ahmed  
 
-📘 Full paper (PDF):  
-- `project and Publication.pdf`
-
-This paper explains the methodology, dataset, experiments, results, discussion, and conclusions in detail.
-
----
 
 ## 📊 Dataset Information
 - **Total students:** 468  
